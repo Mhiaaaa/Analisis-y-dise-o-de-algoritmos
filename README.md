@@ -10,6 +10,11 @@ import java.io.*;
 
 import java.util.*;
 
+
+
+
+
+
 public class OrdenacionExternaSimple {
     public static void main(String[] args) throws IOException {
         // 1. Creamos un archivo con datos desordenados
