@@ -1,0 +1,43 @@
+import java.util.*;
+
+public class MetodoPolifasico {
+    public static void main(String[] args) {
+        // Bloques iniciales ordenados en memoria
+        List<Integer> bloque1 = Arrays.asList(1, 7, 13);
+        List<Integer> bloque2 = Arrays.asList(4, 8, 15);
+        List<Integer> bloque3 = Arrays.asList(2, 9, 14);
+
+        List<List<Integer>> bloques = new ArrayList<>();
+        bloques.add(bloque1);
+        bloques.add(bloque2);
+        bloques.add(bloque3);
+
+        List<Integer> resultado = polifasico(bloques);
+
+        System.out.println("Ordenado con Método Polifásico: " + resultado);
+    }
+
+    public static List<Integer> polifasico(List<List<Integer>> bloques) {
+        while (bloques.size() > 1) {
+            List<Integer> b1 = bloques.remove(0);
+            List<Integer> b2 = bloques.remove(0);
+
+List<Integer> mezclado = mezcla(b1, b2);
+
+            bloques.add(mezclado);
+        }
+        return bloques.get(0);
+    }
+
+    private static List<Integer> mezcla(List<Integer> a, List<Integer> b) {
+        List<Integer> res = new ArrayList<>();
+        int i = 0, j = 0;
+        while (i < a.size() && j < b.size()) {
+            if (a.get(i) <= b.get(j)) res.add(a.get(i++));
+            else res.add(b.get(j++));
+        }
+        while (i < a.size()) res.add(a.get(i++));
+        while (j < b.size()) res.add(b.get(j++));
+        return res;
+    }
+}
