@@ -1,0 +1,51 @@
+import java.util.Arrays;
+
+public class NaturalMergeSort {
+    // Ordenamiento por fusión natural
+    public static void naturalMergeSort(int[] arr) {
+        boolean sorted = false;
+        int n = arr.length;
+
+        while (!sorted) {
+            sorted = true;
+            int left = 0;
+
+            while (left < n - 1) {
+                // Detectar la primera corrida ordenada
+                int mid = left;
+                while (mid < n - 1 && arr[mid] <= arr[mid + 1]) mid++;
+
+                if (mid == n - 1) break;
+
+                // Detectar la siguiente corrida ordenada
+                int right = mid + 1;
+                while (right < n - 1 && arr[right] <= arr[right + 1]) right++;
+
+                // Fusionar las dos corridas
+                merge(arr, left, mid, right);
+
+                sorted = false;
+                left = right + 1;
+            }
+        }
+    }
+
+    // Método de fusión
+    private static void merge(int[] arr, int left, int mid, int right) {
+        int[] temp = Arrays.copyOfRange(arr, left, right + 1);
+        int i = 0, j = mid - left + 1, k = left;
+
+        while (i <= mid - left && j <= right - left) {
+            if (temp[i] <= temp[j]) arr[k++] = temp[i++];
+            else arr[k++] = temp[j++];
+        }
+        while (i <= mid - left) arr[k++] = temp[i++];
+        while (j <= right - left) arr[k++] = temp[j++];
+    }
+
+    public static void main(String[] args) {
+        int[] data = {38, 3, 27, 43, 9, 10, 82};
+        naturalMergeSort(data);
+        System.out.println("Ordenado (Fusión Natural): " + Arrays.toString(data));
+    }
+}
