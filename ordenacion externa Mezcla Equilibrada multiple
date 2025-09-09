@@ -1,0 +1,28 @@
+import java.util.*;
+
+public class MezclaEquilibradaMultiple {
+    public static void main(String[] args) {
+        // Datos simulando "bloques" externos
+        List<Integer> bloque1 = Arrays.asList(2, 8, 12);
+        List<Integer> bloque2 = Arrays.asList(1, 5, 10);
+        List<Integer> bloque3 = Arrays.asList(3, 6, 9);
+
+        // Mezcla equilibrada de todos los bloques
+        List<Integer> resultado = mezclaEquilibrada(bloque1, bloque2, bloque3);
+
+        System.out.println("Ordenado con Mezcla Equilibrada Múltiple: " + resultado);
+    }
+
+    // Método de mezcla equilibrada múltiple
+    public static List<Integer> mezclaEquilibrada(List<Integer>... bloques) {
+        PriorityQueue<Integer> cola = new PriorityQueue<>();
+        for (List<Integer> b : bloques) {
+            cola.addAll(b);
+        }
+        List<Integer> ordenado = new ArrayList<>();
+        while (!cola.isEmpty()) {
+            ordenado.add(cola.poll());
+        }
+        return ordenado;
+    }
+}
